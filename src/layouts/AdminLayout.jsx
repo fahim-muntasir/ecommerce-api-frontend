@@ -14,15 +14,9 @@ import { AuthContext } from "../context/AuthProvider"
 
 const { Sider, Header, Content } = Layout;
 
-// const getUserRole = () => {
-//   const user = JSON.parse(localStorage.getItem("auth"));
-//   return user ? user.role : null;
-// };
-
 const AdminLayout = ({children}) => {
   const {user} = useContext(AuthContext);
   const navigate = useNavigate();
-  // const userRole = getUserRole();
 
   const menuItemsForAdmin = [
     {
@@ -65,7 +59,7 @@ const AdminLayout = ({children}) => {
       children: [
         {
           key: "6",
-          label: "Ürün Listesi",
+          label: "Product list",
           path: "/admin/products",
           onClick: () => {
             navigate(`/admin/products`);
@@ -73,7 +67,7 @@ const AdminLayout = ({children}) => {
         },
         {
           key: "7",
-          label: "Yeni Ürün Oluştur",
+          label: "Create new product",
           path: "/admin/products/create",
           onClick: () => {
             navigate("/admin/products/create");
@@ -102,7 +96,7 @@ const AdminLayout = ({children}) => {
     {
       key: "13",
       icon: <RollbackOutlined />,
-      label: "Shop Now",
+      label: "Go to Home Page",
       onClick: () => {
         navigate(`/`);
       },
@@ -129,7 +123,7 @@ const AdminLayout = ({children}) => {
     {
       key: "13",
       icon: <RollbackOutlined />,
-      label: "Ana Sayfaya Git",
+      label: "Go to Home Page",
       onClick: () => {
         navigate(`/`);
       },

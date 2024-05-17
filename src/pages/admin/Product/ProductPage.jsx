@@ -13,9 +13,9 @@ const ProductPage = () => {
 
   const columns = [
     {
-      title: "Ürün Görseli",
-      dataIndex: "img",
-      key: "img",
+      title: "Image",
+      dataIndex: "avatar",
+      key: "avatar",
       render: (imgSrc) => <img src={imgSrc[0]} alt="Image" width={100} />,
     },
     // {
@@ -29,45 +29,45 @@ const ProductPage = () => {
     //   key: "address",
     // },
     {
-      title: "Ürün İsimi",
+      title: "Name",
       dataIndex: "name",
       key: "name",
       render: (text) => <b>{text}</b>,
     },
 
     {
-      title: "Fiyat",
+      title: "price",
       dataIndex: "price",
       key: "price",
-      render: (text) => <span>{text.current.toFixed(2)}</span>,
+      render: (text) => <span>${text}</span>,
     },
     {
-      title: "İndirim",
-      dataIndex: "price",
-      key: "price",
-      render: (text) => <span>%{text.discount}</span>,
+      title: "Discount",
+      dataIndex: "discount",
+      key: "discount",
+      render: (text) => <span>%{text}</span>,
     },
     {
-      title: "İşlemler",
-      dataIndex: "islemler",
-      key: "islemler",
+      title: "Actions",
+      dataIndex: "Actions",
+      key: "Actions",
       render: (_, record) => (
         <Space>
           <Button
             type="primary"
-            onClick={() => navigate(`/admin/products/update/${record._id}`)}
+            onClick={() => navigate(`/admin/products/update/${record.id}`)}
           >
-            Düzenle
+            Edit
           </Button>
           <Popconfirm
             title="Ürünü sil"
             description="Ürünü silmek istediğinize emin misin?"
             okText="Yes"
             cancelText="No"
-            onConfirm={() => deleteCategory(record._id)}
+            onConfirm={() => deleteCategory(record.id)}
           >
             <Button type="primary" danger>
-              Sil
+              Delete
             </Button>
           </Popconfirm>
         </Space>
@@ -78,16 +78,15 @@ const ProductPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${apiUrl}/api/products`);
+      const response = await fetch(`${apiUrl}/api/v1/products`);
 
       if (response.ok) {
-        const data = await response.json();
+        const {data} = await response.json();
+        console.log(data)
         setDataSource(data);
       } else {
         message.error("Veri getirme başarısız.");
       }
-
-      console.log(response);
     } catch (error) {
       console.log("Veri hatası!", error);
     } finally {
@@ -97,7 +96,7 @@ const ProductPage = () => {
 
   const deleteCategory = async (categoryId) => {
     try {
-      const response = await fetch(`${apiUrl}/api/products/${categoryId}`, {
+      const response = await fetch(`${apiUrl}/api/v1/products/${categoryId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${accessToken}`,

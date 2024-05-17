@@ -13,27 +13,19 @@ const CreateProductPage = () => {
   const apiUrl = import.meta.env.VITE_BASE_URL;
 
   const onFinish = async (values) => {
-    const imgLinks = values.img.split("\n").map((link) => link.trim());
+    const imgLinks = values.avatar.split(",").map((link) => link.trim());
     setLoading(true);
 
     setLoading(true);
 
     const submitInfo = {
       ...values,
-      price: {
-        current: values.current,
-        discount: values.discount,
-      },
-      doctor: {
-        name: values.doctorName,
-        about: values.aboutDoctor
-      },
-      img: imgLinks,
+      avatar: imgLinks,
     }
     console.log(submitInfo);
 
     try {
-      const response = await fetch(`${apiUrl}/api/products`, {
+      const response = await fetch(`${apiUrl}/api/v1/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,16 +37,17 @@ const CreateProductPage = () => {
       if (response.status === 401) {
         logout();
       }
-
+      const datadd = await response.json();
+      console.log(datadd)
 
       if (response.ok) {
-        message.success("Ürün başarıyla oluşturuldu.");
+        message.success("Product created successfully.");
         form.resetFields();
       } else {
-        message.error("Ürün oluşturulurken bir hata oluştu.");
+        message.error("An error occurred while creating the product.");
       }
     } catch (error) {
-      console.log("Ürün oluşturma hatası:", error);
+      console.log("Product creation error:", error);
     } finally {
       setLoading(false);
     }
@@ -65,31 +58,31 @@ const CreateProductPage = () => {
       <Spin spinning={loading}>
         <Form name="basic" layout="vertical" onFinish={onFinish} form={form}>
           <Form.Item
-            label="Ürün İsmi"
-            name="name"
+            label="Product Name"
+            name="title"
             rules={[
               {
                 required: true,
-                message: "Lütfen Ürün adını girin!",
+                message: "Product title is required!",
               },
             ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label="Fiyat"
-            name="current"
+            label="Price"
+            name="price"
             rules={[
               {
                 required: true,
-                message: "Lütfen ürün fiyatını girin!",
+                message: "Price is required!",
               },
             ]}
           >
             <InputNumber />
           </Form.Item>
           <Form.Item
-            label="İndirim Oranı"
+            label="Discount price"
             name="discount"
             rules={[
               {
@@ -101,86 +94,52 @@ const CreateProductPage = () => {
             <InputNumber />
           </Form.Item>
           <Form.Item
-            label="Ürün Açıklaması"
-            name="description"
+            label="Product Category"
+            name="category"
             rules={[
               {
                 required: true,
-                message: "Lütfen bir ürün açıklaması girin!",
-              },
-            ]}
-          >
-            <ReactQuill
-              theme="snow"
-              style={{
-                backgroundColor: "white",
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Doctore name"
-            name="doctorName"
-            rules={[
-              {
-                required: true,
-                message: "Lütfen Ürün adını girin!",
+                message: "Product category is required!",
               },
             ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label="About Doctor"
-            name="aboutDoctor"
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: "Lütfen bir ürün açıklaması girin!",
-            //   },
-            // ]}
-          >
-            <ReactQuill
-              theme="snow"
-              style={{
-                backgroundColor: "white",
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Ingredients"
-            name="ingredients"
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: "Lütfen bir ürün açıklaması girin!",
-            //   },
-            // ]}
-          >
-            <ReactQuill
-              theme="snow"
-              style={{
-                backgroundColor: "white",
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Ürün Görselleri (Linkler)"
-            name="img"
+            label="Product description"
+            name="description"
             rules={[
               {
                 required: true,
-                message: "Lütfen en az 4 ürün görsel linki girin!",
+                message: "Description is required!",
+              },
+            ]}
+          >
+            <ReactQuill
+              theme="snow"
+              style={{
+                backgroundColor: "white",
+              }}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Product Images (Link)"
+            name="avatar"
+            rules={[
+              {
+                required: true,
+                message: "Please enter at least 4 product image links!",
               },
             ]}
           >
             <Input.TextArea
-              placeholder="Her bir görsel linkini yeni bir satıra yazın."
+              placeholder={`Write each image link on a new line. \n https://example1 \n https://example2`}
               autoSize={{ minRows: 4 }}
             />
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
-            Oluştur
+            Save
           </Button>
         </Form>
       </Spin>

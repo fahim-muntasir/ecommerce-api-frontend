@@ -265,6 +265,10 @@ input[type="text"] {
   font-size: 14px;
 }
 
+#searchbar{
+  cursor: pointer;
+}
+
 @media (max-width: 650px) {
   .header-center {
     position: fixed;

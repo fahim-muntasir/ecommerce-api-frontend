@@ -11,39 +11,39 @@ const AdminUserPage = () => {
 
   const columns = [
     {
-      title: "Username",
-      dataIndex: "username",
-      key: "username",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
     },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
+    // {
+    //   title: "Address",
+    //   dataIndex: "address",
+    //   key: "address",
+    // },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
     },
     {
-      title: "İşlemler",
-      dataIndex: "islemler",
-      key: "islemler",
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
       render: (_, record) => (
         <Popconfirm
-          title="Kullanıcıyı sil"
-          description="Kullanıcıyı silmek istediğinize emin misin?"
+          title="Delete user"
+          description="Are you sure you want to delete this user?"
           okText="Yes"
           cancelText="No"
-          onConfirm={() => deleteUser(record.email)}
+          onConfirm={() => deleteUser(record.id)}
         >
           <Button type="primary" danger>
-            Sil
+            Delete
           </Button>
         </Popconfirm>
       ),
@@ -53,7 +53,7 @@ const AdminUserPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${apiUrl}/api/users`, {
+      const response = await fetch(`${apiUrl}/api/v1/users`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -65,23 +65,23 @@ const AdminUserPage = () => {
       }
 
       if (response.ok) {
-        const data = await response.json();
+        const {data} = await response.json();
         setDataSource(data);
       } else {
-        message.error("Veri getirme başarısız.");
+        message.error("User data fetch failed.");
       }
 
       console.log(response);
     } catch (error) {
-      console.log("Veri hatası!", error);
+      console.log("User data fetch error", error);
     } finally {
       setLoading(false);
     }
   }, [apiUrl]);
 
-  const deleteUser = async (userEmail) => {
+  const deleteUser = async (userid) => {
     try {
-      const response = await fetch(`${apiUrl}/api/users/${userEmail}`, {
+      const response = await fetch(`${apiUrl}/api/v1/users/${userid}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -93,15 +93,15 @@ const AdminUserPage = () => {
       }
 
       if (response.ok) {
-        message.success("Kullanıcı başarıyla silindi.");
+        message.success("The user has been deleted successfully.");
         fetchUsers();
       } else {
-        message.error("Silme işlemi başarısız.");
+        message.error("Deletion failed.");
       }
 
       console.log(response);
     } catch (error) {
-      console.log("Silme hatası!", error);
+      console.log("User delete error", error);
     } finally {
       setLoading(false);
     }

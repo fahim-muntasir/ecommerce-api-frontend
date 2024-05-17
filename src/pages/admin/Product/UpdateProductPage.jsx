@@ -22,29 +22,30 @@ const UpdateProductPage = () => {
 
       try {
         const [singleProductResponse] = await Promise.all([
-          fetch(`${apiUrl}/api/products/${productId}`),
+          fetch(`${apiUrl}/api/v1/products/${productId}`),
         ]);
 
         if (!singleProductResponse.ok) {
-          message.error("Veri getirme başarısız.");
+          message.error("Product data fetch failed.");
           return;
         }
 
-        const [singleProductData] = await Promise.all([
+        const [{data : singleProductData}] = await Promise.all([
           singleProductResponse.json(),
         ]);
 
         if (singleProductData) {
           form.setFieldsValue({
-            name: singleProductData.name,
-            current: singleProductData.price.current,
-            discount: singleProductData.price.discount,
+            title: singleProductData.title,
+            price: singleProductData.price,
+            category: singleProductData.category,
+            discount: singleProductData.discount,
             description: singleProductData.description,
-            img: singleProductData.img.join("\n"),
+            avatar: singleProductData.avatar.join("\n"),
           });
         }
       } catch (error) {
-        console.log("Veri hatası:", error);
+        console.log("Product data:", error);
       } finally {
         setLoading(false);
       }
@@ -53,27 +54,23 @@ const UpdateProductPage = () => {
   }, [apiUrl, productId, form]);
 
   const onFinish = async (values) => {
-    const imgLinks = values.img.split("\n").map((link) => link.trim());
+    const imgLinks = values.avatar.split("\n").map((link) => link.trim());
     setLoading(true);
 
-    setLoading(true);
+    const submitInfo = {
+      ...values,
+      avatar: imgLinks,
+    }
+
     try {
-      const response = await fetch(`${apiUrl}/api/products/${productId}`, {
-        method: "PUT",
+      const response = await fetch(`${apiUrl}/api/v1/products/${productId}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
 
-        body: JSON.stringify({
-          ...values,
-          price: {
-            current: values.current,
-            discount: values.discount,
-          },
-
-          img: imgLinks,
-        }),
+        body: JSON.stringify(submitInfo),
       });
 
       if (response.status === 401) {
@@ -81,13 +78,13 @@ const UpdateProductPage = () => {
       }
 
       if (response.ok) {
-        message.success("Ürün başarıyla güncellendi.");
+        message.success("The product has been updated successfully.");
         navigate("/admin/products");
       } else {
-        message.error("Ürün güncellenirken bir hata oluştu.");
+        message.error("An error occurred while updating the product.");
       }
     } catch (error) {
-      console.log("Ürün güncelleme hatası:", error);
+      console.log("Product update error:", error);
     } finally {
       setLoading(false);
     }
@@ -97,32 +94,32 @@ const UpdateProductPage = () => {
     <AdminLayout>
       <Spin spinning={loading}>
         <Form name="basic" layout="vertical" onFinish={onFinish} form={form}>
-          <Form.Item
-            label="Ürün İsmi"
-            name="name"
+        <Form.Item
+            label="Product Name"
+            name="title"
             rules={[
               {
                 required: true,
-                message: "Lütfen Ürün adını girin!",
+                message: "Product title is required!",
               },
             ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label="Fiyat"
-            name="current"
+            label="Price"
+            name="price"
             rules={[
               {
                 required: true,
-                message: "Lütfen ürün fiyatını girin!",
+                message: "Price is required!",
               },
             ]}
           >
             <InputNumber />
           </Form.Item>
           <Form.Item
-            label="İndirim Oranı"
+            label="Discount price"
             name="discount"
             rules={[
               {
@@ -134,12 +131,24 @@ const UpdateProductPage = () => {
             <InputNumber />
           </Form.Item>
           <Form.Item
-            label="Ürün Açıklaması"
+            label="Product Category"
+            name="category"
+            rules={[
+              {
+                required: true,
+                message: "Product category is required!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Product description"
             name="description"
             rules={[
               {
                 required: true,
-                message: "Lütfen bir ürün açıklaması girin!",
+                message: "Description is required!",
               },
             ]}
           >
@@ -151,23 +160,23 @@ const UpdateProductPage = () => {
             />
           </Form.Item>
           <Form.Item
-            label="Ürün Görselleri (Linkler)"
-            name="img"
+            label="Product Images (Link)"
+            name="avatar"
             rules={[
               {
                 required: true,
-                message: "Lütfen en az 4 ürün görsel linki girin!",
+                message: "Please enter at least 4 product image links!",
               },
             ]}
           >
             <Input.TextArea
-              placeholder="Her bir görsel linkini yeni bir satıra yazın."
+              placeholder={`Write each image link on a new line. \n https://example1 \n https://example2`}
               autoSize={{ minRows: 4 }}
             />
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
-            Güncelle
+            Update
           </Button>
         </Form>
       </Spin>

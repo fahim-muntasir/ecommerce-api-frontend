@@ -7,7 +7,7 @@ import "./SearchBarModal.css";
 import $ from "jquery";
 import { CartContext } from "../context/CartProvider";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthProvider"
+import { AuthContext } from "../context/AuthProvider";
 
 const Header = () => {
   const { cartItems } = useContext(CartContext);
@@ -59,40 +59,8 @@ const Header = () => {
                       to={"/"}
                       className={` menu-link ${pathname === "/" && "active"}  `}
                     >
-                      Home 
-                      {/* <i className="bi bi-chevron-down"></i> */}
+                      Home
                     </Link>
-                    {/* <div className="menu-dropdown-wrapper">
-                      <ul className="menu-dropdown-content">
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                        <li>
-                          <a href="#">Lorem1</a>
-                        </li>
-                      </ul>
-                    </div> */}
                   </li>
                   <li className="menu-list-item">
                     <Link
@@ -144,18 +112,12 @@ const Header = () => {
                     </span>
                   </Link>
                 </div>
-                <a href="#" className="searchbarxd">
-                  <i className="bi bi-search" id="searchbar"></i>
-                </a>
+                <i className="bi bi-search" id="searchbar"></i>
                 {user && (
                   <button
                     className="logoutbtn"
                     onClick={() => {
-                      if (
-                        window.confirm(
-                          "Are you sure to logout?"
-                        )
-                      ) {
+                      if (window.confirm("Are you sure to logout?")) {
                         {
                           logout();
                         }
