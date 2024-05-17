@@ -21,8 +21,8 @@ const SingleProduct = ({ singleProduct }) => {
 
   const navigate = useNavigate();
 
-  const originalPrice = singleProduct.price || 0;
-  const discountPercentage = singleProduct.discount || 0;
+  const originalPrice = Number(singleProduct.price) || 0;
+  const discountPercentage = Number(singleProduct.discount) || 0;
 
   //İndirimli fiyat hesaplama
   const discountedPrice =

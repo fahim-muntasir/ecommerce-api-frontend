@@ -36,7 +36,7 @@ const ProductItem = ({ productItem }) => {
         <p></p>
         <p className="item-rating">★★★★☆</p>
         <p className="item-user">4.37 (9)</p>
-        <p className="item-price">${discountedPrice}</p>
+        <p className="item-price">${discountedPrice.toFixed(2)}</p>
         <p className="item-price-2">${originalPrice}</p>
       </div>
       <div className="product-links">

@@ -3,12 +3,15 @@ import "./Cart.css";
 import { CartContext } from "../context/CartProvider";
 import { Link, useLocation } from "react-router-dom";
 
-const CartTotals = ({orderHandler, loading}) => {
+const CartTotals = ({ orderHandler, loading }) => {
   const location = useLocation();
   const { cartItems } = useContext(CartContext);
 
   const cartItemTotals = cartItems.map((item) => {
-    const itemTotal = item?.product?.price * item.quantity;
+    const itemTotal =
+      (item?.product?.price -
+        (item?.product?.price * item?.product?.discount) / 100 || 0) *
+      item.quantity;
 
     return itemTotal;
   });
@@ -50,7 +53,13 @@ const CartTotals = ({orderHandler, loading}) => {
       </table>
       <div className="checkout">
         {location?.pathname === "/checkout" ? (
-          <button disabled={loading} className="checkout-btn" onClick={orderHandler} >Confirm order</button>
+          <button
+            disabled={loading}
+            className="checkout-btn"
+            onClick={orderHandler}
+          >
+            Confirm order
+          </button>
         ) : (
           <Link to={"/checkout"}>
             <button className="checkout-btn">Proceed to checkout</button>

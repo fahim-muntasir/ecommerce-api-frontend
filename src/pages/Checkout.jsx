@@ -41,12 +41,18 @@ export default function Checkout() {
     }
 
     const submitInfo = {
-      ...formData,
-      items: cartItems,
+      orderInfo: {
+        ...formData,
+      },
+      items: cartItems.map((item) => ({
+        product: item.product.id,
+        quantity: item.quantity,
+        price: item.product.price,
+      })),
     };
 
     try {
-      const response = await fetch(`${apiUrl}/api/order`, {
+      const response = await fetch(`${apiUrl}/api/v1/checkout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,6 +61,12 @@ export default function Checkout() {
         body: JSON.stringify(submitInfo),
       });
 
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        window.location = data.url;
+      }
+
       if (response.status === 401) {
         logout();
       }
@@ -62,13 +74,35 @@ export default function Checkout() {
       if (!response.ok) {
         throw new Error("Failed to place order");
       }
-      // Handle successful response
-      console.log("Order placed successfully");
       setloading(false);
     } catch (error) {
-      console.error("Error placing order:", error);
-      setloading(false);
+      console.log(error);
     }
+
+    // try {
+    //   const response = await fetch(`${apiUrl}/api/order`, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //     body: JSON.stringify(submitInfo),
+    //   });
+
+    //   if (response.status === 401) {
+    //     logout();
+    //   }
+
+    //   if (!response.ok) {
+    //     throw new Error("Failed to place order");
+    //   }
+    //   // Handle successful response
+    //   console.log("Order placed successfully");
+    //   setloading(false);
+    // } catch (error) {
+    //   console.error("Error placing order:", error);
+    //   setloading(false);
+    // }
   };
 
   return (

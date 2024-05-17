@@ -36,7 +36,7 @@ const Header = () => {
         <div className="container">
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit
-            <a href="shop.html"> SATIN AL</a>
+            <Link to={"/shop"}> Buy now!</Link>
           </p>
         </div>
       </div>

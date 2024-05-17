@@ -11,7 +11,6 @@ const CartProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
-  console.log("cartItems:", cartItems);
   const apiUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
@@ -31,8 +30,6 @@ const CartProvider = ({ children }) => {
       if (response.ok) {
         const { data } = await response.json();
         setCartItems(data);
-      } else {
-        message.error("Somthing went wrong with fetch cart data!");
       }
     };
 
