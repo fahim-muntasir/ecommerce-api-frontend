@@ -255,6 +255,16 @@ input[type="text"] {
   padding-bottom: 35.5px;
 }
 
+.logoutbtn{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.logoutbtn > i{
+  font-size: 14px;
+}
+
 @media (max-width: 650px) {
   .header-center {
     position: fixed;

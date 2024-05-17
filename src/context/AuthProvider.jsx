@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_BASE_URL;
 
 export const AuthContext = createContext();
@@ -15,9 +15,9 @@ const AuthProvider = ({ children }) => {
     const initializeAuth = async () => {
       // Check if there are URL parameters for token and user
       const params = new URLSearchParams(location.search);
-      const tokenOfUrl = params.get('token');
-      const userOfUrl = params.get('user');
-      const userDecoded = JSON.parse(decodeURIComponent(userOfUrl))
+      const tokenOfUrl = params.get("token");
+      const userOfUrl = params.get("user");
+      const userDecoded = JSON.parse(decodeURIComponent(userOfUrl));
 
       if (tokenOfUrl && userOfUrl) {
         // set accesstoken and user data in the local store
@@ -46,9 +46,8 @@ const AuthProvider = ({ children }) => {
     };
 
     initializeAuth();
-    console.log("llllllllllllllllllll")
   }, [location.search]);
-  
+
   // useEffect(() => {
   //   const auth = JSON.parse(localStorage.getItem("auth"));
 
@@ -84,7 +83,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (payload) => {
     try {
-      const response = await fetch(`${apiUrl}/api/auth/login`, {
+      const response = await fetch(`${apiUrl}/api/v1/auth/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,23 +91,27 @@ const AuthProvider = ({ children }) => {
         body: JSON.stringify(payload),
       });
 
-      const { data } = await response.json();
+      if (response.ok) {
+        const { data } = await response.json();
 
-      // set accesstoken and user data in the local store
-      localStorage.setItem(
-        "auth",
-        JSON.stringify({
-          accessToken: data.token,
-          user: data.user,
-        })
-      );
+        // set accesstoken and user data in the local store
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            accessToken: data.token,
+            user: data.user,
+          })
+        );
 
-      setUser(data?.user);
-      setAccessToken(data?.token);
+        setUser(data?.user);
+        setAccessToken(data?.token);
 
-      return data;
+        return data;
+      }
+
+      return false;
     } catch (error) {
-      console.log("Giriş hatası!", error);
+      console.log("Something went wrong with login!", error);
     }
   };
 
@@ -117,7 +120,7 @@ const AuthProvider = ({ children }) => {
 
     setUser("");
     setAccessToken("");
-  }
+  };
 
   const values = {
     login,
@@ -126,7 +129,11 @@ const AuthProvider = ({ children }) => {
     accessToken,
   };
 
-  return <AuthContext.Provider value={values}>{!loading && children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={values}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

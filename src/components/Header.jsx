@@ -149,11 +149,11 @@ const Header = () => {
                 </a>
                 {user && (
                   <button
-                    className="search-button btn"
+                    className="logoutbtn"
                     onClick={() => {
                       if (
                         window.confirm(
-                          "Çıkış yapmak istediğinize emin misiniz?"
+                          "Are you sure to logout?"
                         )
                       ) {
                         {

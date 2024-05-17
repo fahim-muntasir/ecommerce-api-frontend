@@ -12,10 +12,10 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/products`);
+        const response = await fetch(`${apiUrl}/api/v1/products`);
 
         if (response.ok) {
-          const data = await response.json();
+          const {data} = await response.json();
           setProducts(data);
         } else {
           message.error("Veri getirme başarısız.");

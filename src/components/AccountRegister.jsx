@@ -5,7 +5,7 @@ import { message } from "antd";
 
 const AccountRegister = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     password: "",
     email: "",
   });
@@ -21,7 +21,7 @@ const AccountRegister = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${apiUrl}/api/auth/register`, {
+      const response = await fetch(`${apiUrl}/api/v1/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,19 +29,16 @@ const AccountRegister = () => {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        // const{ password, ...rest} = data;
-        localStorage.setItem("user", JSON.stringify(data));
-        message.success("Kayıt işlemi başarılı.");
-        navigate("/");
-      } else {
-        message.error("Kayıt işlemi başarısız.");
-      }
+      const data = await response.json();
 
-      console.log(response);
+      if (response.ok) {
+        message.success("Registration successfull.");
+        navigate("/account");
+      } else {
+        message.error(data?.error);
+      }
     } catch (error) {
-      console.log("Giriş hatası!", error);
+      console.log("Somthing went wrong with registration!", error);
     }
   };
 
@@ -63,45 +60,48 @@ const AccountRegister = () => {
               </div>
               <div className="account-register-form-wrapper">
                 <div className="account-register-personal-information">
-                  <div className="account-register-name-last-name">
-                    <p className="personal-information-title name-register">
-                      Name *
-                    </p>
-                    <form onSubmit={handleRegister}>
-                      <input
-                        type="text"
-                        onChange={handleInputChange}
-                        name="username"
-                      />
-                    </form>
-                  </div>
-                  <div className="personal-subject">
-                    <p className="personal-information-title email-register">
-                      E-Mail *
-                    </p>
-                    <form onSubmit={handleRegister}>
-                      <input
-                        type="email"
-                        onChange={handleInputChange}
-                        name="email"
-                      />
-                    </form>
-                  </div>
-                  <div className="personal-subject">
-                    <p className="personal-information-title password-register">
-                      Password *
-                    </p>
-                    <form onSubmit={handleRegister}>
-                      <input
-                        type="password"
-                        onChange={handleInputChange}
-                        name="password"
-                      />
-                    </form>
-                  </div>
                   <form onSubmit={handleRegister}>
+                    <div className="account-register-name-last-name">
+                      <p className="personal-information-title name-register">
+                        Name *
+                      </p>
+                      <form onSubmit={handleRegister}>
+                        <input
+                          required
+                          type="text"
+                          onChange={handleInputChange}
+                          name="name"
+                        />
+                      </form>
+                    </div>
+                    <div className="personal-subject">
+                      <p className="personal-information-title email-register">
+                        E-Mail *
+                      </p>
+                      <form onSubmit={handleRegister}>
+                        <input
+                          required
+                          type="email"
+                          onChange={handleInputChange}
+                          name="email"
+                        />
+                      </form>
+                    </div>
+                    <div className="personal-subject">
+                      <p className="personal-information-title password-register">
+                        Password *
+                      </p>
+                      <form onSubmit={handleRegister}>
+                        <input
+                          required
+                          type="password"
+                          onChange={handleInputChange}
+                          name="password"
+                        />
+                      </form>
+                    </div>
                     <div className="register-button">
-                      <button>Register</button>
+                      <button type="submit">Register</button>
                     </div>
                   </form>
                 </div>

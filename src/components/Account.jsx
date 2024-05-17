@@ -24,9 +24,13 @@ const Account = () => {
 
     try {
       const data = await login(formData);
-      console.log(data);
 
-      message.success("Kayıt işlemi başarılı.");
+      if (!data) {
+        message.error("Login failed please try again!");
+        return;
+      }
+
+      message.success("Login successful.");
 
       if (data?.user.role === "admin") {
         navigate("/dashboard");
@@ -34,7 +38,7 @@ const Account = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log("Giriş hatası!", error);
+      console.log("Something went wrong with login!", error);
     }
   };
 
@@ -122,7 +126,7 @@ const Account = () => {
                   </p>
                 </div>
                 <div className="register-button login-button">
-                  <Link to={"/AccountRegister"}>
+                  <Link to={"/accountRegister"}>
                     <button>Register</button>
                   </Link>
                 </div>
