@@ -1,0 +1,68 @@
+input {
+  width: 100%;
+  height: 40px;
+  border: solid 1px #dee0ea;
+  padding-left: 20px;
+}
+
+textarea{
+  width: 100%;
+  border: solid 1px #dee0ea;
+  padding: 20px;
+  outline: none;
+}
+
+.addressInput{
+  margin-top: 40px;
+}
+
+.formGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.formGroup > div {
+  width: 50%;
+}
+
+.personal-information-title {
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .account-all {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 900px) {
+  .account-all {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .account-all {
+    flex-direction: column;
+  }
+
+  .account-left form > input,
+  .account-left button,
+  .account-right button {
+    width: 100%;
+  }
+
+  .account-left .personal-subject {
+    margin-bottom: 20px;
+  }
+
+  .account-left .login-button button {
+    margin-top: 20px;
+  }
+}
+
+.account-personal-information {
+  margin-bottom: 30px;
+}

@@ -1,0 +1,179 @@
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    margin-top: 40px;
+  }
+  
+  .section-title h2 {
+    font-size: 33px;
+    font-weight: 600;
+  }
+  
+  
+  
+  
+  .product-item .product-links {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    visibility: hidden;
+    opacity: 0;
+  
+  }
+  
+  .product-item .product-links .links-heart {
+    background-color:
+      white;
+  
+  }
+  
+  .product-item .product-links .links-basket {
+    background-color:
+      white;
+  
+  }
+  
+  .product-item .product-links button {
+    background-color: rgba(0, 0, 0, 0.786);
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all ease 0s;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .product-item .product-links button:disabled {
+    opacity: 0.4 !important;
+    cursor: default;
+  }
+  
+  button:disabled {
+    opacity: 0.4 !important;
+    cursor: default;
+  }
+  
+  .product-item .product-links i {
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    pointer-events: none;
+  }
+  
+  .product-item .product-links button:hover {
+    opacity: 0.7;
+  }
+  
+  .products .product-item:hover .product-links {
+    opacity: 1;
+    visibility: visible;
+    transition: ease all 0.3s;
+  }
+  
+  .products .product-item {
+    text-align: center;
+    display: flex;
+    /* Gri alanı yatayda dolduracak bir flex konteyner oluşturun */
+    flex-direction: column;
+    /* İçeriği dikey olarak düzenlemek için kullanılır */
+    align-items: center;
+    /* İçeriği dikeyde ortalamak için kullanılır */
+    justify-content: center;
+    /* İçeriği yatayda ortalamak için kullanılır */
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .products .merhabalar{
+    display: grid;
+  }
+  .products .splide__list{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media screen and (max-width: 768px) {
+    .products .splide__list{
+        grid-template-columns: 1fr 1fr;
+      }
+  }
+
+  .splide.is-initialized:not(.is-active) .splide__list {
+    display: grid;
+}
+  
+  
+  
+  .products .product-item img {
+    width: 100%;
+    transition: ease-in-out all 0.2s;
+  }
+  
+  .products .product-item .product-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+  
+  .products .product-img-1:hover {
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  .products .product-image {
+    transition: ease-in-out all 0.2s;
+  }
+  
+  .products .product-image:hover .product-img-2 {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .products .product-img-2 {
+    display: flex;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .products .product-item .product-title {
+    font-size: 19px;
+    display: inline-block;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .products .product-item .item-user {
+    margin-bottom: 10px;
+  }
+  
+  .products .product-item .item-price {
+    font-weight: 500;
+    z-index: 1;
+    position: relative;
+    display: inline-flex;
+    margin-right: 7px;
+  }
+  
+  .products .product-item .item-price-2 {
+    font-weight: 400;
+    z-index: 1;
+    position: relative;
+    display: inline-flex;
+    text-decoration: line-through;
+  }
+  
+  .products .product-item .item-rating {
+    font-weight: 400;
+    font-size: 25px;
+    margin-bottom: 6px;
+  }
+  
+  .products .product-item .item-user {
+    font-weight: 400;
+  }

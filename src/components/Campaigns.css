@@ -1,0 +1,48 @@
+.campaign-single {
+    background-image: url("./../assets/imgs/bg5.jpg");
+    padding: 178px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .campaign-single .campaign-wrapper {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .campaign-single .campaign-wrapper h2 {
+    font-size: 25px;
+  }
+  
+  .campaign-single .campaign-wrapper strong {
+    font-size: 50px;
+    font-weight: 600;
+  }
+  
+  .campaign-single .campaign-wrapper p {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  
+  .campaign-single .campaign-wrapper a {
+    border: 1px solid white;
+    padding: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: #fff;
+    border-radius: 1px;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+  
+  .campaign-single .campaign-wrapper a:hover {
+    background-color: #ffffff48;
+    transition: ease 0.3s;
+  }

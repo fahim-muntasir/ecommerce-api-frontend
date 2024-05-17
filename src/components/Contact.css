@@ -1,0 +1,154 @@
+.get-in-touch-title {
+    font-size: 35px;
+    margin-top: 30px;
+  }
+  
+  .get-in-touch-desc {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  
+  .subscribe-button {
+    margin-bottom: 40px;
+  }
+  
+  .subscribe-button button {
+    padding: 10px 30px;
+    background-color: rgba(0, 0, 0, 0.888);
+    color: white;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .contact .personal-information-title {
+    font-size: 14px;
+  }
+  
+  .contact .contact-bottom .personal-information .name-last-name {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .contact .contact-bottom .personal-information form>input {
+    width: 300px;
+    height: 32px;
+    border: 1px solid #dee0ea;
+    padding-left: 13px;
+  }
+  
+  .contact .contact-bottom .personal-subject form>input {
+    width: 618px;
+    margin-bottom: 20px;
+  }
+  
+  .contact .contact-bottom .personal-message form>input {
+    width: 618px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .contact .form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .company-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 100px;
+  }
+  
+  .company-info .company-title {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .company-info .company-desc {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  
+  
+  .company-info .company-desc-last {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .company-info a {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .company-info .company-email {
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+  
+  .contact-top .contact-map iframe {
+    margin-bottom: -10px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .get-in-touch-title {
+      font-size: 24px;
+    }
+  
+    .get-in-touch-desc {
+      font-size: 12px;
+    }
+  
+    .subscribe-button {
+      margin-bottom: 20px;
+    }
+  
+    .subscribe-button button {
+      padding: 8px 20px;
+      font-size: 14px;
+    }
+  
+    .contact .contact-bottom .personal-information form>input {
+      width: 100%;
+    }
+  
+    .contact .contact-bottom .personal-subject form>input {
+      width: 100%;
+    }
+  
+    .contact .contact-bottom .personal-message form>input {
+      width: 100%;
+    }
+  
+    .form-wrapper {
+      flex-direction: column;
+      gap: 30px;
+    }
+  
+    .company-info .company-title {
+      font-size: 14px;
+    }
+  
+    .company-info .company-desc,
+    .company-info a,
+    .company-info .company-email {
+      font-size: 11px;
+    }
+  
+    .company-info {
+      margin-left: unset;
+    }
+  
+    .company-info .company-desc-last {
+      font-size: 12px;
+      margin-bottom: 40px;
+    }
+  }
+  
+  @media (max-width: 998px) and (min-width: 769px) {
+    .company-info {
+      margin-left: 30px;
+    }
+  }

@@ -1,0 +1,85 @@
+[
+    {
+        "id": 1,
+        "name": "Silicium G2 Original 1L",
+        "price": 40.50,
+        "price2":31.99,
+        "img": {
+            "singleImage": "https://siliciumg5.com/813-large_default/silicium-g7-original-1l-biodinamizated.webp",
+            "singleImage2": "https://siliciumg5.com/814-large_default/silicium-g7-original-1l-biodinamizated.jpg",
+            "thumbs": [
+                "https://siliciumg5.com/813-large_default/silicium-g7-original-1l-biodinamizated.jpg",
+                "https://siliciumg5.com/1307-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1583-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1196-large_default/silicium-g7-original-1l-biodinamizated.webp"
+
+                
+            ]
+        }
+    },
+    {
+        "id": 2,
+        "name": "Silicium G5 Original 1L",
+        "price": 142.50,
+        "price2":32.99,
+        "img": {
+            "singleImage": "https://siliciumg5.com/905-large_default/g7-neuro-health.webp",
+            "singleImage2": "https://siliciumg5.com/801-home_default/g7-neuro-health.jpg",
+            "thumbs": [
+                "https://siliciumg5.com/905-large_default/g7-neuro-health.webp",
+                "https://siliciumg5.com/1307-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1583-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1196-large_default/silicium-g7-original-1l-biodinamizated.webp"
+            ]
+        }
+    },
+    {
+        "id": 3,
+        "name": "Silicium G8 Original 1L",
+        "price": 240.50,
+        "price2":33.99,
+        "img": {
+            "singleImage": "https://siliciumg5.com/840-large_default/silicium-g7-beauty.webp",
+            "singleImage2": "https://siliciumg5.com/757-home_default/silicium-g7-beauty.jpg",
+            
+            "thumbs": [
+                "https://siliciumg5.com/840-large_default/silicium-g7-beauty.webp",
+                "https://siliciumg5.com/1307-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1583-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1196-large_default/silicium-g7-original-1l-biodinamizated.webp"
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "name": "Silicium G9 Original 1L",
+        "price": 340.50,
+        "price2":39.99,
+        "img": {
+            "singleImage": "https://siliciumg5.com/1320-large_default/silicium-g7-activ-.webp",
+            "singleImage2": "https://siliciumg5.com/792-home_default/silicium-g7-activ-.jpg",
+            "thumbs": [
+                "https://siliciumg5.com/1320-large_default/silicium-g7-activ-.webp",
+                "https://siliciumg5.com/1307-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1583-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1196-large_default/silicium-g7-original-1l-biodinamizated.webp"
+            ]
+        }
+    },
+    {
+        "id": 5,
+        "name": "Silicium G9 Original 1L",
+        "price": 340.50,
+        "price2":39.99,
+        "img": {
+            "singleImage": "https://siliciumg5.com/1320-large_default/silicium-g7-activ-.webp",
+            "singleImage2": "https://siliciumg5.com/792-home_default/silicium-g7-activ-.jpg",
+            "thumbs": [
+                "https://siliciumg5.com/1320-large_default/silicium-g7-activ-.webp",
+                "https://siliciumg5.com/1307-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1583-large_default/silicium-g7-original-1l-biodinamizated.webp",
+                "https://siliciumg5.com/1196-large_default/silicium-g7-original-1l-biodinamizated.webp"
+            ]
+        }
+    }
+]

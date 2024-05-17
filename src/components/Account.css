@@ -1,0 +1,160 @@
+.account .account-all {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.login-title {
+  font-size: 35px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.login-desc {
+  margin-bottom: 20px;
+}
+
+.account-left form > input {
+  width: 618px;
+  height: 40px;
+  border: solid 1px #dee0ea;
+  padding-left: 20px;
+}
+
+.account-left form {
+  margin-bottom: 30px;
+}
+
+.account-left .personal-subject {
+  margin-bottom: 10px;
+}
+
+.account-right .login-button button {
+  padding: 15px 40px;
+  font-size: 12px;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.888);
+  margin-bottom: 30px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.888);
+}
+
+.account-right .login-button button:hover {
+  opacity: 0.7;
+  transition: ease all 0.4s;
+  color: rgba(0, 0, 0, 0.888);
+}
+
+.account-left .login-button button {
+  padding: 15px 40px;
+  font-size: 13px;
+  background-color: rgba(0, 0, 0, 0.888);
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.account-left .login-button button:hover {
+  opacity: 0.8;
+  transition: ease all 0.4s;
+}
+
+.account-right .login-desc {
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 40px;
+}
+
+.account-left .login-desc {
+  font-size: 14px;
+}
+
+.account-left .personal-information-title {
+  font-size: 14px;
+}
+
+.remember-me {
+  font-size: 12px;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.remember-me span {
+  cursor: pointer;
+}
+
+.remember-me input {
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.account-lost {
+  font-size: 12px;
+  color: rgb(199, 19, 19);
+}
+
+.socialMediaLoginButton{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.socialMediaLoginButton > button{
+  background: transparent;
+  outline: none;
+  display: flex;
+  align-items: center;
+  border: 1px solid #dee0ea;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px;
+  gap: 15px;
+  font-size: 16px;
+}
+
+.socialMediaLoginButton > button > img{
+  width: 25px;
+}
+
+@media (max-width: 768px) {
+  .account-all {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 900px) {
+  .account-all {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .account-all {
+    flex-direction: column;
+  }
+
+  .account-left form > input,
+  .account-left .login-button button,
+  .account-right button {
+    width: 100%;
+  }
+
+  .account-left .personal-subject {
+    margin-bottom: 20px;
+  }
+
+  .account-left .login-button button {
+    margin-top: 20px;
+  }
+}
+
+.account-personal-information {
+  margin-bottom: 30px;
+}

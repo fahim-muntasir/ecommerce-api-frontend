@@ -1,0 +1,131 @@
+.blogarea .blog-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.blogarea .blog-wrapper .single-blog {
+  background-color: #00000019;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 350px;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.blogarea .blog-wrapper .single-blog {
+  display: flex;
+  flex-direction: column;
+}
+
+.blogarea .blog-wrapper .single-blog:hover {
+  transform: scale(1.01);
+  transition: 0.4s ease;
+}
+
+.blogarea .blog-wrapper .single-blog1 {
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://i.ibb.co/wNmQykC/output-onlinepngtools-1.png");
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.blogarea .blog-wrapper .single-blog1 h1 {
+  margin-bottom: 10px;
+  margin-top: -60px;
+  padding: 0 30px;
+}
+
+.blog-text1 {
+  padding: 0 30px;
+}
+
+.blogarea .blog-wrapper .single-blog2 {
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://i.ibb.co/ykV5psn/output-onlinepngtools-2.png");
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.blogarea .blog-wrapper .single-blog2 h1 {
+  margin-bottom: 10px;
+  margin-top: -100px;
+  padding: 0 30px;
+}
+
+.blog-text2 {
+  padding: 0 30px;
+}
+
+.blogarea .blog-wrapper .single-blog3 {
+  justify-content: center;
+  background-color: #9c116253;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.blogarea .blog-wrapper .single-blog3 h1 {
+  margin-bottom: 10px;
+  margin-top: -50px;
+  padding: 0 30px;
+}
+
+.blog-text3 {
+  padding: 0 30px;
+}
+
+.blogarea .blog-wrapper .single-blog4 {
+  justify-content: center;
+  background-color: #c97a1253;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.blogarea .blog-wrapper .single-blog4 h1 {
+  margin-bottom: 10px;
+  margin-top: -30px;
+  padding: 0 30px;
+}
+
+.blog-text4 {
+  padding: 0 30px;
+}
+
+@media only screen and (max-width: 768px) {
+  .blogarea .blog-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .blogarea .blog-wrapper .single-blog p {
+    font-size: 16px;
+  }
+
+  .blogarea .blog-wrapper .single-blog2 h1 {
+    margin-bottom: 10px;
+    margin-top: -80px;
+    padding: 0 30px;
+    padding-top: 40px;
+  }
+  .blogarea .blog-wrapper .single-blog3 h1 {
+    margin-bottom: 10px;
+    margin-top: -30px;
+    padding: 0 30px;
+  }
+
+  .blogarea .blog-wrapper .single-blog4 h1 {
+    margin-bottom: 10px;
+    margin-top: 0px;
+    padding: 0 30px;
+  }
+}
