@@ -78,7 +78,7 @@ const CartProvider = ({ children }) => {
 
         message.success("Product added successfully!");
       } else {
-        message.error("Something went wrong with cart!");
+        message.error("Please login first.");
       }
     } catch (error) {
       console.log("Something went wrong with cart:", error);

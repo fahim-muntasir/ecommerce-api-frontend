@@ -1,4 +1,4 @@
-import { Button, Popconfirm, Space, Table, message, Select } from "antd";
+import { Table, message } from "antd";
 import { useCallback, useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import AdminLayout from "../../layouts/AdminLayout";
@@ -15,13 +15,13 @@ const UserOrderPage = () => {
     let color = "";
 
     switch (status) {
-      case "Pending":
+      case "pending":
         color = "blue";
         break;
-      case "Paid":
+      case "paid":
         color = "green";
         break;
-      case "Failed":
+      case "failed":
         color = "red";
         break;
       default:
@@ -39,8 +39,8 @@ const UserOrderPage = () => {
     {
       title: "Customer",
       dataIndex: "customer",
-      key: "username",
-      render: (customer) => <span>{customer.username}</span>,
+      key: "name",
+      render: (customer) => <span>{customer.name}</span>,
     },
     {
       title: "Email",
@@ -50,14 +50,14 @@ const UserOrderPage = () => {
     },
     {
       title: "Total",
-      dataIndex: "total",
-      key: "total",
+      dataIndex: "totalprice",
+      key: "totalprice",
       render: (text) => <span>${text}</span>,
     },
     {
       title: "Payment",
-      dataIndex: "paymentStatus",
-      key: "paymentStatus",
+      dataIndex: "paymentstatus",
+      key: "paymentstatus",
       render: (status) => (
         <span style={getPaymentStatusStyle(status)}>{status}</span>
       ),
@@ -72,7 +72,7 @@ const UserOrderPage = () => {
   const fetchCategories = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/api/order/${user.id}`, {
+      const response = await fetch(`${apiUrl}/api/v1/users/${user.id}/orders`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -85,13 +85,14 @@ const UserOrderPage = () => {
       }
 
       if (response.ok) {
-        const data = await response.json();
+        const { data } = await response.json();
+
         setDataSource(data);
       } else {
-        message.error("Veri getirme başarısız.");
+        message.error("Data fetch failed!");
       }
     } catch (error) {
-      console.log("Veri hatası!", error);
+      console.log("Order fetch error!", error);
     } finally {
       setLoading(false);
     }
@@ -105,19 +106,19 @@ const UserOrderPage = () => {
     const columns = [
       {
         title: "Product",
-        dataIndex: "product",
-        key: "product",
+        dataIndex: "avatar",
+        key: "avatar",
         render: (product) => (
-          <img src={product.img[0]} alt="Image" width={100} />
+          <img src={product[0]} alt="Image" width={100} height={100} />
         ),
       },
-      { title: "Product Name", dataIndex: "productName", key: "productName" },
+      { title: "Product Name", dataIndex: "title", key: "title" },
       { title: "Price", dataIndex: "price", key: "price" },
       {
         title: "Discount",
-        dataIndex: "product",
-        key: "product",
-        render: (product) => <span>{product?.price?.discount}%</span>,
+        dataIndex: "discount",
+        key: "discount",
+        render: (discount) => <span>{discount}%</span>,
       },
       { title: "Quantity", dataIndex: "quantity", key: "quantity" },
     ];
@@ -133,11 +134,11 @@ const UserOrderPage = () => {
         loading={loading}
         dataSource={dataSource}
         columns={columns}
-        rowKey={(record) => record._id}
+        rowKey={(record) => record.id}
         expandable={{
           expandedRowRender,
           onExpand: (expanded, record) => {
-            setExpandedRowKeys(expanded ? [record._id] : []);
+            setExpandedRowKeys(expanded ? [record.id] : []);
           },
           expandedRowKeys,
         }}

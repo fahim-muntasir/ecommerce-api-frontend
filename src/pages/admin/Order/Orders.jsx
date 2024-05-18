@@ -14,8 +14,8 @@ const Orders = () => {
     console.log(record);
     console.log(value);
     try {
-      const response = await fetch(`${apiUrl}/api/order/status/${record._id}`, {
-        method: "PUT",
+      const response = await fetch(`${apiUrl}/api/v1/orders/status/${record.id}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -29,8 +29,9 @@ const Orders = () => {
 
       if (response.ok) {
         const updatedOrder = await response.json();
+        console.log(updatedOrder);
 
-        message.success(updatedOrder?.message);
+        message.success("Status has been updated successfully.");
       } else {
         message.error("Failed to update order status:");
       }
@@ -44,13 +45,13 @@ const Orders = () => {
     let color = "";
 
     switch (status) {
-      case "Pending":
+      case "pending":
         color = "blue";
         break;
-      case "Paid":
+      case "paid":
         color = "green";
         break;
-      case "Failed":
+      case "failed":
         color = "red";
         break;
       default:
@@ -68,8 +69,8 @@ const Orders = () => {
     {
       title: "Customer",
       dataIndex: "customer",
-      key: "username",
-      render: (customer) => <span>{customer.username}</span>,
+      key: "name",
+      render: (customer) => <span>{customer.name}</span>,
     },
     {
       title: "Email",
@@ -79,14 +80,14 @@ const Orders = () => {
     },
     {
       title: "Total",
-      dataIndex: "total",
-      key: "total",
+      dataIndex: "totalprice",
+      key: "totalprice",
       render: (text) => <span>${text}</span>,
     },
     {
       title: "Payment",
-      dataIndex: "paymentStatus",
-      key: "paymentStatus",
+      dataIndex: "paymentstatus",
+      key: "paymentstatus",
       render: (status) => (
         <span style={getPaymentStatusStyle(status)}>{status}</span>
       ),
@@ -101,24 +102,26 @@ const Orders = () => {
           style={{ width: 120 }}
           onChange={(value) => handleStatusChange(value, record)}
         >
-          <Select.Option value="Pending">Pending</Select.Option>
-          <Select.Option value="Confirm">Confirm</Select.Option>
-          <Select.Option value="Delivered">Delivered</Select.Option>
+          <Select.Option value="pending">Pending</Select.Option>
+          <Select.Option value="processing">Processing</Select.Option>
+          <Select.Option value="shipped">Shipped</Select.Option>
+          <Select.Option value="delivered">Delivered</Select.Option>
+          <Select.Option value="cancelled">Cancelled</Select.Option>
         </Select>
       ),
     },
     {
       title: "Actions",
-      dataIndex: "islemler",
-      key: "islemler",
+      dataIndex: "Actions",
+      key: "Actions",
       render: (_, record) => (
         <Space>
           <Popconfirm
-            title="Ürünü sil"
-            description="Ürünü silmek istediğinize emin misin?"
+            title="Delete product"
+            description="Are you sure you want to delete the product?"
             okText="Yes"
             cancelText="No"
-            onConfirm={() => deleteOrder(record._id)}
+            onConfirm={() => deleteOrder(record.id)}
           >
             <Button type="primary" danger>
               Delete
@@ -132,7 +135,7 @@ const Orders = () => {
   const fetchCategories = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/api/order`, {
+      const response = await fetch(`${apiUrl}/api/v1/orders`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -145,14 +148,14 @@ const Orders = () => {
       }
 
       if (response.ok) {
-        const data = await response.json();
+        const { data } = await response.json();
         console.log(data);
         setDataSource(data);
       } else {
-        message.error("Veri getirme başarısız.");
+        message.error("Order data fetch failed!");
       }
     } catch (error) {
-      console.log("Veri hatası!", error);
+      console.log("Order error!", error);
     } finally {
       setLoading(false);
     }
@@ -164,7 +167,7 @@ const Orders = () => {
 
   const deleteOrder = async (orderId) => {
     try {
-      const response = await fetch(`${apiUrl}/api/order/${orderId}`, {
+      const response = await fetch(`${apiUrl}/api/v1/orders/${orderId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -176,15 +179,15 @@ const Orders = () => {
       }
 
       if (response.ok) {
-        message.success("Ürün başarıyla silindi.");
+        message.success("The order was successfully deleted.");
         fetchCategories();
       } else {
-        message.error("Silme işlemi başarısız.");
+        message.error("Deletion failed.");
       }
 
       console.log(response);
     } catch (error) {
-      console.log("Silme hatası!", error);
+      console.log("Delete error!", error);
     } finally {
       setLoading(false);
     }
@@ -194,24 +197,29 @@ const Orders = () => {
     const columns = [
       {
         title: "Product",
-        dataIndex: "product",
-        key: "product",
+        dataIndex: "avatar",
+        key: "avatar",
         render: (product) => (
-          <img src={product.img[0]} alt="Image" width={100} />
+          <img src={product[0]} alt="Image" width={100} height={100} />
         ),
       },
-      { title: "Product Name", dataIndex: "productName", key: "productName" },
+      { title: "Product Name", dataIndex: "title", key: "title" },
       { title: "Price", dataIndex: "price", key: "price" },
       {
         title: "Discount",
-        dataIndex: "product",
-        key: "product",
-        render: (product) => <span>{product?.price?.discount}%</span>,
+        dataIndex: "discount",
+        key: "discount",
+        render: (discount) => <span>{discount}%</span>,
       },
       { title: "Quantity", dataIndex: "quantity", key: "quantity" },
     ];
 
     const addressColumns = [
+      {
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
+      },
       {
         title: "Address",
         dataIndex: "address",
@@ -237,11 +245,11 @@ const Orders = () => {
     return (
       <>
         <Table
-        columns={addressColumns}
-        dataSource={[record.orderInfo]}
-        pagination={false}
-      />
-      <Table columns={columns} dataSource={record.items} pagination={false} />
+          columns={addressColumns}
+          dataSource={[record.orderinfo]}
+          pagination={false}
+        />
+        <Table columns={columns} dataSource={record.items} pagination={false} />
       </>
     );
   };
@@ -252,11 +260,11 @@ const Orders = () => {
         loading={loading}
         dataSource={dataSource}
         columns={columns}
-        rowKey={(record) => record._id}
+        rowKey={(record) => record.id}
         expandable={{
           expandedRowRender,
           onExpand: (expanded, record) => {
-            setExpandedRowKeys(expanded ? [record._id] : []);
+            setExpandedRowKeys(expanded ? [record.id] : []);
           },
           expandedRowKeys,
         }}
